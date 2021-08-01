@@ -2,41 +2,36 @@
   <div>
     <v-card>
       <div v-if="play_url">
-        <iframe
-          :src="play_url"
-          frameborder="0"
-          scrolling="no"
-          width="100%"
-          :height="height"
-          allowfullscreen="true"
-        ></iframe>
+        <iframe :src="play_url" frameborder="0" scrolling="no" width="100%" :height="height" allowfullscreen="true"></iframe>
       </div>
       <div v-else>
         <v-img :src="require('../assets/haibao.png')"></v-img>
       </div>
       <v-divider></v-divider>
       <v-card-actions class="ml-1">
-        <v-btn
-          id="copy"
-          depressed
-          class="ma-1"
-          :data-clipboard-text="play_url"
-          @click="copy"
-        >
+        <v-btn id="copy" color="primary" class="ma-1" :data-clipboard-text="play_url" @click="copy">
           {{ copy_tip }}
         </v-btn>
-        <v-chip
-          v-for="n in chip_genre"
-          v-bind:key="n"
-          class="ma-1"
-          :color="color[Math.round(Math.random() * 3)]"
-          label
-          text-color="white"
-        >
+
+        <v-chip label class="ma-1">
+          <v-icon left>
+            mdi-thumb-up-outline
+          </v-icon>
+          <div v-if="rank_douban">
+            {{ '豆瓣评分：' + rank_douban }}
+          </div>
+          <div v-else>
+            豆瓣评分：暂无
+          </div>
+        </v-chip>
+
+        <v-chip v-for="n in chip_genre" v-bind:key="n" class="ma-1" :color="color[Math.round(Math.random() * 3)]" label text-color="white">
+          <v-icon left>
+            mdi-label
+          </v-icon>
           {{ n }}
         </v-chip>
 
-        <v-chip label v-text="'评分：' + rank_douban" class="ma-1"></v-chip>
       </v-card-actions>
     </v-card>
   </div>

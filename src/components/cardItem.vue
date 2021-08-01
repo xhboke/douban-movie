@@ -19,25 +19,16 @@ v-row
         <v-img class="white--text align-end" :src="img" aspect-ratio="0.7">
           <div class="figure_caption"></div>
           <span class="figure_score" v-if="rank != 0">{{ rank }}</span>
-          <img
-            v-if="is_bofang"
-            class="mark_v"
-            :src="require('../assets/card/card_dubo.png')"
-          />
+          <img v-if="is_bofang" class="mark_v" :src="require('../assets/card/card_dubo.png')" />
           <v-expand-transition>
-            <div
-              v-if="hover"
-              class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-5 white--text pa-2"
-              style="height: 100%"
-            >
+            <div v-if="hover" class="d-flex transition-fast-in-fast-out orange darken-2 v-card--reveal display-5 white--text pa-2" style="height: 100%">
               {{ name }}
             </div>
           </v-expand-transition>
         </v-img>
       </v-card>
     </v-hover>
-    <v-list-item-title class="bold mt-2 mx-1"
-      ><strong class="red--text text--lighten-1" v-if="is_new">[新]</strong>
+    <v-list-item-title class="bold mt-2 mx-1"><strong class="red--text text--lighten-1" v-if="is_new">[新]</strong>
       <router-link :to="'/subject/' + id" id="name"> {{ name }}</router-link>
     </v-list-item-title>
   </v-col>

@@ -31,13 +31,7 @@
       <v-tab-item>
         <v-card>
           <v-card-text>
-            <v-chip
-              class="ma-2"
-              color="primary"
-              text-color="white"
-              v-for="n in info.Actors"
-              v-bind:key="n.ActorId"
-            >
+            <v-chip class="ma-2" color="primary" text-color="white" v-for="n in info.Actors" v-bind:key="n.ActorId">
               <v-avatar left>
                 <router-link :to="'/celebrity/' + n.ActorId" class="text-decoration-none">
                   <v-img :src="n.ActorImage" class="imgt"></v-img>
@@ -50,13 +44,7 @@
       </v-tab-item>
       <v-tab-item>
         <v-row class="mx-1">
-          <cardItem
-            :id="n.id"
-            :name="n.name"
-            :img="n.img"
-            v-for="(n, index) in info.OtherLike"
-            :key="n.id + index"
-          />
+          <cardItem :id="n.id" :name="n.name" :img="n.img" v-for="(n, index) in info.OtherLike" :key="n.id + index" />
         </v-row>
       </v-tab-item>
       <v-tab-item>
@@ -64,15 +52,15 @@
           <p v-if="info.Year">年代：{{ info.Year }}</p>
           <p v-if="info.Language">语言：{{ info.Language }}</p>
           <p v-if="info.Movie_length">影片时长：{{ info.Movie_length }}</p>
+          <p v-if="info.Movie_length">
+            影片时长：{{ info.Movie_length }}
+          </p>
           <p v-if="info.Single_episode_length">
             单集片长：{{ info.Single_episode_length }}
           </p>
           <p v-if="info.DatePublished">首播：{{ info.DatePublished }}</p>
-          <div v-if="info.Single_episode_length">
-            <p>片长：{{ info.Single_episode_length }}</p>
-          </div>
-
           <p v-if="info.Votes">评分人数：{{ info.Votes }}</p>
+          <p v-if="info.Other_name">其他名称：{{ info.Other_name }}</p>
         </v-card-text>
       </v-tab-item>
     </v-tabs>

@@ -61,6 +61,8 @@
       <p>1. 增加影人详情数据展示</p>
       <p>2. 影片播放地址复制功能</p>
       <p>3. 影片语言、片长信息</p>
+      <h3>### 【1.4.0】2021/7/31</h3>
+      <p>1. 数据缺失优化显示</p>
     </v-card-text>
   </v-card>
 </template>
@@ -76,7 +78,7 @@ export default {
 
 <style scoped>
 h3 {
-  maring: 0;
+  margin: 0;
   padding: 0;
   line-height: 20px;
 }

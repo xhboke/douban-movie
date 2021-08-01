@@ -56,15 +56,14 @@ const api = {
 };
 
 const sitename = "苍穹影视";
-const version = "1.3.1";
-const email = "xh@apa.me";
+const version = "1.4.0";
+const email = "xhapame@gmail.com";
 const beian = "蜀ICP备18000550号";
 if (VueCookies.isKey('toolbar_color')) {
   var toolbar_color = "#" + VueCookies.get("toolbar_color");
 } else {
   toolbar_color = "#3F51B5";
 }
-const alert_type = "warning";
 const intro_color = "teal";
 const comment_color = "teal";
 const play_origin_color = "teal";
@@ -76,7 +75,6 @@ export default {
   email,
   beian,
   toolbar_color,
-  alert_type,
   intro_color,
   comment_color,
   play_origin_color,

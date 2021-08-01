@@ -14,19 +14,9 @@
 
           <v-list-item-content>
             <v-list-item-title>{{ n.name }}</v-list-item-title>
-            <v-list-item-subtitle
-              >{{ n.time }}
-              <v-rating
-                :value="n.rating"
-                dense
-                x-small
-                color="orange"
-                background-color="orange"
-                hover
-                half-increments
-                readonly
-              ></v-rating
-            ></v-list-item-subtitle>
+            <v-list-item-subtitle>{{ n.time }}
+              <v-rating :value="n.rating" dense x-small color="orange" background-color="orange" hover half-increments readonly></v-rating>
+            </v-list-item-subtitle>
 
             <v-list-item-subtitle> {{ n.content }} </v-list-item-subtitle>
           </v-list-item-content>

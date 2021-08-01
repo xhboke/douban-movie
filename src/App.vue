@@ -5,18 +5,8 @@
       <v-container class="box">
         <router-view></router-view>
         <!--回到顶部按钮-->
-        <v-btn
-          v-show="backTopShow"
-          class="goTop"
-          color="primary"
-          @click="$vuetify.goTo(0, 'duration')"
-          fab
-          small
-          dark
-          fixed
-          bottom
-          right
-          ><v-icon>mdi-chevron-up</v-icon>
+        <v-btn v-show="backTopShow" class="goTop" color="primary" @click="$vuetify.goTo(0, 'duration')" fab small dark fixed bottom right>
+          <v-icon>mdi-chevron-up</v-icon>
         </v-btn>
       </v-container>
     </v-main>
@@ -56,7 +46,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .box {
   max-width: 1080px;
 }
