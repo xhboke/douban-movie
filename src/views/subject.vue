@@ -1,26 +1,13 @@
 <template>
   <div>
-    <v-sheet
-      :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
-      class="px-3 pt-3 pb-3"
-      v-if="!flag"
-    >
+    <v-sheet :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`" class="px-3 pt-3 pb-3" v-if="!flag">
       <v-skeleton-loader type="card" class="mt-3"></v-skeleton-loader>
       <v-skeleton-loader type="card-heading" class="mt-3"></v-skeleton-loader>
-      <v-skeleton-loader
-        type="list-item-avatar-three-line"
-        class="mt-3"
-        v-for="n in 3"
-        :key="n"
-      ></v-skeleton-loader>
+      <v-skeleton-loader type="list-item-avatar-three-line" class="mt-3" v-for="n in 3" :key="n"></v-skeleton-loader>
     </v-sheet>
 
     <div v-if="flag">
-      <playCard
-        :play_url="play_url"
-        :chip_genre="infoData.Genre"
-        :rank_douban="String(infoData.Rating)"
-      />
+      <playCard :play_url="play_url" :chip_genre="infoData.Genre" :rank_douban="String(infoData.Rating)" />
 
       <PlayIntro :info="infoData" />
       <PlayButton :play_URL_DATA="infoData.EpisodeUrl" v-if="infoData.EpisodeUrl" />
@@ -65,21 +52,23 @@ export default {
         } else {
           _is_accurate = true;
         }
-        this.GLOBAL.api.info(this.$route.params.id, _is_accurate).then((res) => {
-          if (res.data.Name) {
-            this.id = this.$route.params.id;
-            this.infoData = res.data;
-            this.change_site_title(this.infoData.Name);
-            this.change_bar_title(this.infoData.Name);
-            this.flag = true;
-          } else {
-            this.$router.push("/404");
-          }
+        this.GLOBAL.api
+          .info(this.$route.params.id, _is_accurate)
+          .then((res) => {
+            if (res.data.Name) {
+              this.id = this.$route.params.id;
+              this.infoData = res.data;
+              this.change_site_title(this.infoData.Name);
+              this.change_bar_title(this.infoData.Name);
+              this.flag = true;
+            } else {
+              this.$router.push("/404");
+            }
 
-          if (this.$route.params.url) {
-            this.play();
-          }
-        });
+            if (this.$route.params.url) {
+              this.play();
+            }
+          });
       }
     },
     change_site_title: function (site_title) {

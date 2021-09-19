@@ -50,6 +50,9 @@
       <v-tab-item>
         <v-card-text>
           <p v-if="info.Year">年代：{{ info.Year }}</p>
+          <p v-if="info.All_directors">导演：{{ info.All_directors }}</p>
+          <p v-if="info.All_writers">编剧：{{ info.All_writers }}</p>
+          <p v-if="info.All_actors">主演：{{ info.All_actors }}</p>
           <p v-if="info.Language">语言：{{ info.Language }}</p>
           <p v-if="info.Movie_length">影片时长：{{ info.Movie_length }}</p>
           <p v-if="info.Movie_length">

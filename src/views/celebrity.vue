@@ -46,15 +46,10 @@
         <v-card-title>影人图片</v-card-title>
         <v-card-text>
           <v-row>
-            <v-col
-              sm="6"
-              md="2"
-              lg="2"
-              cols="6"
-              v-for="i in celebrity_data.some_images"
-              :key="i"
-            >
-              <v-card><v-img :src="i"></v-img></v-card>
+            <v-col sm="6" md="2" lg="2" cols="6" v-for="i in celebrity_data.some_images" :key="i">
+              <v-card>
+                <v-img :src="i"></v-img>
+              </v-card>
             </v-col>
           </v-row>
         </v-card-text>
@@ -63,25 +58,13 @@
         <v-card-title>最近电影</v-card-title>
         <v-card-text>
           <v-row>
-            <cardItem
-              :id="n.id"
-              :name="n.title"
-              :img="n.image"
-              :is_bofang="false"
-              :is_new="false"
-              v-for="n in celebrity_data['recent_movies']"
-              :key="n.id"
-            />
+            <cardItem :id="n.id" :name="n.title" :img="n.image" :is_bofang="false" :is_new="false" v-for="n in celebrity_data['recent_movies']" :key="n.id" />
           </v-row>
         </v-card-text>
       </v-card>
     </v-container>
     <v-card v-else>
-      <v-sheet
-        :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
-        class="px-3 pt-3 pb-3"
-        v-if="!flag"
-      >
+      <v-sheet :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`" class="px-3 pt-3 pb-3" v-if="!flag">
         <v-skeleton-loader type="card" class="mt-3"></v-skeleton-loader>
         <v-skeleton-loader type="card-heading" class="mt-3"></v-skeleton-loader>
       </v-sheet>

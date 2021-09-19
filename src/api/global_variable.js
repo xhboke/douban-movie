@@ -16,7 +16,11 @@ const api = {
     }
   },
   comment(id, page) {
-    return axios.get(base.baseUrl + "?type=comment&id=" + id + "&page=" + page);
+    if (VueCookies.isKey('comment_sort')) {
+      return axios.get(base.baseUrl + "?type=comment&id=" + id + "&page=" + page + "&sort=" + VueCookies.get("comment_sort"));
+    } else {
+      return axios.get(base.baseUrl + "?type=comment&id=" + id + "&page=" + page);
+    }
   },
   celebrity(id) {
     return axios.get(base.baseUrl + "?type=celebrity&id=" + id);
@@ -56,7 +60,7 @@ const api = {
 };
 
 const sitename = "苍穹影视";
-const version = "1.4.0";
+const version = "1.4.1";
 const email = "xhapame@gmail.com";
 const beian = "蜀ICP备18000550号";
 if (VueCookies.isKey('toolbar_color')) {

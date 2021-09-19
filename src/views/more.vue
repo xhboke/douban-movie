@@ -4,14 +4,7 @@
       <!-- form -->
       <v-slide-group show-arrows center-active v-model="form_" class="mt-2">
         <v-slide-item v-for="n in Form" :key="n" v-slot="{ active, toggle }">
-          <v-btn
-            class="mx-2"
-            :input-value="active"
-            active-class="purple white--text"
-            depressed
-            rounded
-            @click="toggle(), change_()"
-          >
+          <v-btn class="mx-2" :input-value="active" active-class="purple white--text" depressed rounded @click="toggle(), change_()">
             {{ n }}
           </v-btn>
         </v-slide-item>
@@ -19,14 +12,7 @@
       <!-- type -->
       <v-slide-group show-arrows center-active v-model="type_" class="mt-2">
         <v-slide-item v-for="n in Type" :key="n" v-slot="{ active, toggle }">
-          <v-btn
-            class="mx-2"
-            :input-value="active"
-            active-class="purple white--text"
-            depressed
-            rounded
-            @click="toggle(), change_()"
-          >
+          <v-btn class="mx-2" :input-value="active" active-class="purple white--text" depressed rounded @click="toggle(), change_()">
             {{ n }}
           </v-btn>
         </v-slide-item>
@@ -34,14 +20,7 @@
       <!-- region -->
       <v-slide-group show-arrows center-active v-model="region_" class="mt-2">
         <v-slide-item v-for="n in Region" :key="n" v-slot="{ active, toggle }">
-          <v-btn
-            class="mx-2"
-            :input-value="active"
-            active-class="purple white--text"
-            depressed
-            rounded
-            @click="toggle(), change_()"
-          >
+          <v-btn class="mx-2" :input-value="active" active-class="purple white--text" depressed rounded @click="toggle(), change_()">
             {{ n }}
           </v-btn>
         </v-slide-item>
@@ -49,14 +28,7 @@
       <!-- year -->
       <v-slide-group show-arrows center-active v-model="year_" class="mt-2">
         <v-slide-item v-for="n in Year" :key="n" v-slot="{ active, toggle }">
-          <v-btn
-            class="mx-2"
-            :input-value="active"
-            active-class="purple white--text"
-            depressed
-            rounded
-            @click="toggle(), change_()"
-          >
+          <v-btn class="mx-2" :input-value="active" active-class="purple white--text" depressed rounded @click="toggle(), change_()">
             {{ n }}
           </v-btn>
         </v-slide-item>
@@ -64,39 +36,19 @@
       <!-- style -->
       <v-slide-group show-arrows center-active v-model="style_" class="mt-2">
         <v-slide-item v-for="n in Style" :key="n" v-slot="{ active, toggle }">
-          <v-btn
-            class="mx-2"
-            :input-value="active"
-            active-class="purple white--text"
-            depressed
-            rounded
-            @click="toggle(), change_()"
-          >
+          <v-btn class="mx-2" :input-value="active" active-class="purple white--text" depressed rounded @click="toggle(), change_()">
             {{ n }}
           </v-btn>
         </v-slide-item>
       </v-slide-group>
     </v-sheet>
     <v-radio-group v-model="sort_" row>
-      <v-radio
-        v-for="n in Sort"
-        :key="n[0]"
-        :label="n[1]"
-        :value="n[0]"
-        @click="change_()"
-      ></v-radio>
+      <v-radio v-for="n in Sort" :key="n[0]" :label="n[1]" :value="n[0]" @click="change_()"></v-radio>
     </v-radio-group>
     <v-divider></v-divider>
 
     <v-row>
-      <cardItem
-        :id="n.id"
-        :name="n.name"
-        :img="n.image"
-        :rank="n.rating"
-        v-for="n in more_data"
-        :key="n.id"
-      />
+      <cardItem :id="n.id" :name="n.name" :img="n.image" :rank="n.rating" v-for="n in more_data" :key="n.id" />
     </v-row>
     <v-btn block @click="more_page++, more_more()">
       {{ more_more_text }}
