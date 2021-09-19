@@ -12,7 +12,7 @@
 export default {
   name: "Snackbar",
   props: {
-    snackbar: String,
+    snackbar: Boolean,
     text: String,
   },
 };

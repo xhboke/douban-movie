@@ -25,6 +25,7 @@ export default {
       search_page: 0,
       search_data: "",
       search_more_text: "查看更多",
+      search_suggest: "",
       search_suggest_item: ["苍穹精华", "API"],
     };
   },
@@ -33,8 +34,16 @@ export default {
   },
   watch: {
     search_suggest(val) {
-      this.search_suggest_item = ["1", "2", "lth"];
-      console.log(val);
+      // Lazily load input items
+      fetch("https://movie.douban.com/j/subject_suggest?q=" + val)
+        .then((res) => res.json())
+        .then(() => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally();
     },
   },
   created() {
@@ -52,11 +61,11 @@ export default {
     }
   },
   methods: {
-    // get_suggest: function (suggest_word) {
-    //   this.GLOBAL.api.getSuggest(suggest_word).then((res) => {
-    //     this.search_suggest = Object.values(res.data);
-    //   });
-    // },
+    get_suggest: function (suggest_word) {
+      this.GLOBAL.api.getSuggest(suggest_word).then((res) => {
+        this.search_suggest = Object.values(res.data);
+      });
+    },
     Go_search: function () {
       this.$router.push("/search/" + this.search_name);
       this.search(this.search_name, 0);
