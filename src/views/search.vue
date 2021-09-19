@@ -1,7 +1,6 @@
 <template>
   <div>
-    <v-autocomplete v-model="search_name" :items="search_suggest_item" :search-input.sync="search_suggest" hide-no-data>
-    </v-autocomplete>
+    <v-text-field solo-inverted hide-details prepend-inner-icon="mdi-magnify" label="输入影片名称或播放网址" clearable flat :loading="text_loading" v-model="search_name" @keyup.enter="Go_search"></v-text-field>
     <div v-if="flag">
       <div class="text-h6 mt-6 subtitle">关于 <span class="red--text">{{ this.$route.params.search_name }} </span>的搜索结果</div>
       <v-row>
@@ -25,26 +24,10 @@ export default {
       search_page: 0,
       search_data: "",
       search_more_text: "查看更多",
-      search_suggest: "",
-      search_suggest_item: ["苍穹精华", "API"],
     };
   },
   components: {
     cardItem,
-  },
-  watch: {
-    search_suggest(val) {
-      // Lazily load input items
-      fetch("https://movie.douban.com/j/subject_suggest?q=" + val)
-        .then((res) => res.json())
-        .then(() => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally();
-    },
   },
   created() {
     if (this.$route.params.search_name) {
