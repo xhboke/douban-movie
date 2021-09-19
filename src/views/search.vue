@@ -44,11 +44,6 @@ export default {
     }
   },
   methods: {
-    get_suggest: function (suggest_word) {
-      this.GLOBAL.api.getSuggest(suggest_word).then((res) => {
-        this.search_suggest = Object.values(res.data);
-      });
-    },
     Go_search: function () {
       this.$router.push("/search/" + this.search_name);
       this.search(this.search_name, 0);
