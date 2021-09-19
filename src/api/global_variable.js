@@ -54,6 +54,9 @@ const api = {
   getCelebrity(id) {
     return axios.get(base.baseUrl + "?type=celebrity&id=" + id);
   },
+  getSuggest(word) {
+    return axios.get(base.baseUrl + "?type=search_suggest&name=" + word);
+  },
   getApi() {
     return base.baseUrl + "?url=";
   },

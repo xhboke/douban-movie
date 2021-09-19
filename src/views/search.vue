@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-text-field solo-inverted hide-details prepend-inner-icon="mdi-magnify" label="输入影片名称或播放网址" clearable flat :loading="text_loading" v-model="search_name" @keyup.enter="Go_search"></v-text-field>
-
+    <v-autocomplete v-model="search_name" :items="search_suggest_item" :search-input.sync="search_suggest" hide-no-data>
+    </v-autocomplete>
     <div v-if="flag">
       <div class="text-h6 mt-6 subtitle">关于 <span class="red--text">{{ this.$route.params.search_name }} </span>的搜索结果</div>
       <v-row>
@@ -25,10 +25,17 @@ export default {
       search_page: 0,
       search_data: "",
       search_more_text: "查看更多",
+      search_suggest_item: ["苍穹精华", "API"],
     };
   },
   components: {
     cardItem,
+  },
+  watch: {
+    search_suggest(val) {
+      this.search_suggest_item = ["1", "2", "lth"];
+      console.log(val);
+    },
   },
   created() {
     if (this.$route.params.search_name) {
@@ -45,6 +52,11 @@ export default {
     }
   },
   methods: {
+    // get_suggest: function (suggest_word) {
+    //   this.GLOBAL.api.getSuggest(suggest_word).then((res) => {
+    //     this.search_suggest = Object.values(res.data);
+    //   });
+    // },
     Go_search: function () {
       this.$router.push("/search/" + this.search_name);
       this.search(this.search_name, 0);
