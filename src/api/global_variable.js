@@ -63,7 +63,7 @@ const api = {
 };
 
 const sitename = "苍穹影视";
-const version = "1.4.1";
+const version = "1.4.2";
 const email = "xhapame@gmail.com";
 const beian = "蜀ICP备18000550号";
 if (VueCookies.isKey('toolbar_color')) {
