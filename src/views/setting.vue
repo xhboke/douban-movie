@@ -57,7 +57,7 @@ export default {
       is_open_history: false,
       radios: "",
       snackbar_text: "",
-      snackbar_open: "",
+      snackbar_open: false,
     };
   },
   components: {
@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     open_sncakbar: function (info) {
-      this.snackbar_open = "1";
+      this.snackbar_open = true;
       this.snackbar_text = info;
     },
     set_comment_sort: function (sort) {
