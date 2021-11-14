@@ -10,7 +10,7 @@
       <playCard :play_url="play_url" :chip_genre="infoData.Genre" :rank_douban="String(infoData.Rating)" />
 
       <PlayIntro :info="infoData" />
-      <PlayButton :play_URL_DATA="infoData.EpisodeUrl" v-if="infoData.EpisodeUrl" />
+      <PlayButton :play_URL_DATA="infoData.EpisodeUrl" v-if="infoData.EpisodeUrl" @transfer="get_play_url" />
       <PlayComment :play_REVIEW_Id="infoData.Id" />
     </div>
   </div>
@@ -38,38 +38,31 @@ export default {
     };
   },
   created() {
-    this.chushihua();
+    this.GLOBAL.api.info(this.$route.params.id).then((res) => {
+      if (res.data.Name) {
+        this.id = this.$route.params.id;
+        this.infoData = res.data;
+        this.change_site_title(this.infoData.ChineseName);
+        this.change_bar_title(
+          this.infoData.Name + "(" + this.infoData.Year + ")"
+        );
+        this.flag = true;
+      } else {
+        this.$router.push("/404");
+      }
+
+      if (this.$route.params.url) {
+        this.play(this.$route.params.url);
+      }
+    });
   },
   methods: {
-    play: function () {
-      this.play_url = this.GLOBAL.api.getApi() + this.$route.params.url;
-    },
-    chushihua: function () {
-      if (this.$route.params.id) {
-        // 是否需要播放，默认需要
-        if (this.$cookies.get("is_open_play") == 0) {
-          var _is_accurate = false;
-        } else {
-          _is_accurate = true;
-        }
-        this.GLOBAL.api
-          .info(this.$route.params.id, _is_accurate)
-          .then((res) => {
-            if (res.data.Name) {
-              this.id = this.$route.params.id;
-              this.infoData = res.data;
-              this.change_site_title(this.infoData.Name);
-              this.change_bar_title(this.infoData.Name);
-              this.flag = true;
-            } else {
-              this.$router.push("/404");
-            }
-
-            if (this.$route.params.url) {
-              this.play();
-            }
-          });
-      }
+    play: function (url) {
+      this.GLOBAL.api.getApi(url).then((res) => {
+        this.play_url = res.data.url;
+        console.log("flag2: " + this.play_url);
+      });
+      console.log("flag1: " + url + this.play_url);
     },
     change_site_title: function (site_title) {
       document.title = site_title + " - " + this.GLOBAL.sitename;
@@ -77,14 +70,16 @@ export default {
     change_bar_title: function (bar_title) {
       this.$root.bartitle = bar_title;
     },
+    get_play_url: function (url) {
+      this.play_url = this.play(url);
+    },
   },
   watch: {
     "$route.path": function (newVal, oldVal) {
       if (newVal.startsWith(oldVal)) {
-        console.log(this.$route.params.url);
-        this.play_url = this.GLOBAL.api.getApi() + this.$route.params.url;
+        this.play(this.$route.params.url);
       } else {
-        this.play();
+        this.play(this.$route.params.url);
       }
     },
   },

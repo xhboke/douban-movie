@@ -27,7 +27,7 @@ const routes = [
     },
   },
   {
-    path: "/subject/:id/:url?",
+    path: "/subject/:id",
     name: "Subject",
     component: () => import("../views/subject.vue"),
     meta: {

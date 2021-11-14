@@ -53,17 +53,18 @@
           <p v-if="info.All_directors">导演：{{ info.All_directors }}</p>
           <p v-if="info.All_writers">编剧：{{ info.All_writers }}</p>
           <p v-if="info.All_actors">主演：{{ info.All_actors }}</p>
+          <p v-if="info.Genre">类型：{{ info.Genre }}</p>
+          <p v-if="info.Region">制片国家/地区：{{ info.Region }}</p>
           <p v-if="info.Language">语言：{{ info.Language }}</p>
+          <p v-if="info.DatePublished">首播：{{ info.DatePublished }}</p>
+          <p v-if="info.Episode">集数：{{ info.Episode }}</p>
           <p v-if="info.Movie_length">影片时长：{{ info.Movie_length }}</p>
-          <p v-if="info.Movie_length">
-            影片时长：{{ info.Movie_length }}
-          </p>
           <p v-if="info.Single_episode_length">
             单集片长：{{ info.Single_episode_length }}
           </p>
-          <p v-if="info.DatePublished">首播：{{ info.DatePublished }}</p>
           <p v-if="info.Votes">评分人数：{{ info.Votes }}</p>
           <p v-if="info.Other_name">其他名称：{{ info.Other_name }}</p>
+          <p v-if="info.IMDB">IMDB：{{ info.IMDB }}</p>
         </v-card-text>
       </v-tab-item>
     </v-tabs>

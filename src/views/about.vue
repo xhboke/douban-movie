@@ -69,6 +69,10 @@
       <h3>### 【1.4.2】2021/9/19</h3>
       <p>1. 增加评论排序方式，在Setting页面设置</p>
       <p>2. 增加Setting页面修改成功或失败的Snackbars</p>
+      <h3>### 【1.5.0】2021/11/14</h3>
+      <p>1. 使用ThinkPhp作为后端API的框架</p>
+      <p>2. 使用DPlayer播放器代替原先的iframe</p>
+      <p>3. 删除路由中播放地址的显示</p>
     </v-card-text>
   </v-card>
 </template>

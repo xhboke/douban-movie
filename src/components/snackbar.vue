@@ -1,5 +1,5 @@
 <template>
-  <v-snackbar v-model="snackbar" top="true">
+  <v-snackbar v-model="snackbar" :top="true" :right="true">
     {{ text }}
     <template v-slot:action="{ attrs }">
       <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">

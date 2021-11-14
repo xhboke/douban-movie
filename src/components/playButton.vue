@@ -6,15 +6,15 @@
       </v-toolbar-title>
     </v-toolbar>
 
-    <v-alert border="left" colored-border type="success" elevation="2" class="ma-3">
-      获取的播放来源：{{play_URL_DATA.status == 0 ? '《豆瓣电影》' : play_URL_DATA.status == 404 ? '《互联网》' : '《获取失败》'}}
+    <v-alert :type="play_URL_DATA.status == 200?'success':'error'" class="ma-4">
+      {{play_URL_DATA.status == 200 ? '获取影片播放链接成功！' : '获取影片播放链接失败！'}}
     </v-alert>
 
     <v-divider></v-divider>
 
     <v-tabs v-if="play_URL_DATA.type == 'tv'" vertical>
       <v-tab v-for="(n, index) in play_URL_DATA.data" :key="index">
-        播放来源 {{ parseInt(index) + 1 }}
+        播放来源 {{  parseInt(index) + 1 }}
       </v-tab>
       <v-tab-item v-for="(n, index) in play_URL_DATA.data" :key="index">
         <v-btn color="primary" class="ma-1" dark v-for="(i, m) in play_URL_DATA.data[index]" :key="i" @click="toPlay(i, parseInt(m) + 1)">
@@ -41,9 +41,11 @@ export default {
     };
   },
   methods: {
-    toPlay: function (url, index) {
-      this.$router.push("/subject/" + this.$route.params.id + "/" + url);
-      this.now_epi = "正在播放：" + index;
+    // 播放地址和播放名称
+    toPlay: function (url, name) {
+      // 传入父组件
+      this.$emit("transfer", url);
+      this.now_epi = "正在播放：" + name;
     },
   },
 };

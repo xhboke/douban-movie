@@ -2,68 +2,56 @@ import axios from "../utils/http";
 import VueCookies from 'vue-cookies';
 
 const base = {
-  baseUrl: "//" + document.domain + "/douban/",
+  baseUrl: "http://localhost:8000",
 };
 const api = {
   search(name, page) {
-    return axios.get(base.baseUrl + "?type=search&s=" + name + "&page=" + page);
+    return axios.get(base.baseUrl + "/search/" + name + "/" + page);
   },
-  info(id, type = true) {
-    if (type == true) {
-      return axios.get(base.baseUrl + "?type=info&id=" + id);
-    } else {
-      return axios.get(base.baseUrl + '?type=info&method=1&id=' + id)
-    }
+  info(id) {
+    return axios.get(base.baseUrl + "/subject/" + id);
   },
   comment(id, page) {
     if (VueCookies.isKey('comment_sort')) {
-      return axios.get(base.baseUrl + "?type=comment&id=" + id + "&page=" + page + "&sort=" + VueCookies.get("comment_sort"));
+      return axios.get(base.baseUrl + "/subject/" + id + "/comments?page=" + page + "&sort=" + VueCookies.get("comment_sort"));
     } else {
-      return axios.get(base.baseUrl + "?type=comment&id=" + id + "&page=" + page);
+      return axios.get(base.baseUrl + "/subject/" + id + "/comments?page=" + page);
     }
   },
   celebrity(id) {
-    return axios.get(base.baseUrl + "?type=celebrity&id=" + id);
+    return axios.get(base.baseUrl + "/celebrity/" + id);
   },
   tag(tags, page, sort) {
-    return axios.get(
-      base.baseUrl +
-      "?type=tag&tags=" +
-      tags +
-      "&page=" +
-      page +
-      "&sort=" +
-      sort
-    );
+    return axios.get(base.baseUrl + "/tag?tags=" + tags + "&page=" + page + "&sort=" + sort);
   },
   now_playing() {
-    return axios.get(base.baseUrl + "?type=nowplaying");
+    return axios.get(base.baseUrl + "/movies/nowplaying");
   },
   index_movie() {
-    return axios.get(base.baseUrl + "?type=indexM");
+    return axios.get(base.baseUrl + "/movies/movie");
   },
   index_tv() {
-    return axios.get(base.baseUrl + "?type=indexT");
+    return axios.get(base.baseUrl + "/movies/tv");
   },
   top250(page) {
-    return axios.get(base.baseUrl + "?type=top250&page=" + page);
+    return axios.get(base.baseUrl + "/top250/" + page);
   },
   carousel() {
     return axios.get(base.baseUrl + "?type=carousel");
   },
   getCelebrity(id) {
-    return axios.get(base.baseUrl + "?type=celebrity&id=" + id);
+    return axios.get(base.baseUrl + "/celebrity/" + id);
   },
   getSuggest(word) {
-    return axios.get(base.baseUrl + "?type=search_suggest&name=" + word);
+    return axios.get(base.baseUrl + "/search/key/" + word);
   },
-  getApi() {
-    return base.baseUrl + "?url=";
+  getApi(url) {
+    return axios.get(base.baseUrl + "/play?url=" + url);
   },
 };
 
 const sitename = "苍穹影视";
-const version = "1.4.2";
+const version = "1.5.0";
 const email = "xhapame@gmail.com";
 const beian = "蜀ICP备18000550号";
 if (VueCookies.isKey('toolbar_color')) {
