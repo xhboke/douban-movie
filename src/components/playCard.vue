@@ -69,7 +69,6 @@ export default {
       console.log("changeVideoUrl: " + newval);
       this.loadVideo(newval);
       if (newval == "" || newval == null || newval == undefined) {
-        this.snackbar_text = "";
         this.open_sncakbar("Error");
       } else {
         this.snackbar_text = "";
@@ -94,6 +93,16 @@ export default {
     loadVideo(videoUrl) {
       this.dp = new DPlayer({
         container: document.getElementById("dplayer"),
+        autoplay: false,
+        theme: "#FADFA3",
+        loop: true,
+        lang: "zh-cn",
+        screenshot: true,
+        hotkey: true,
+        preload: "auto",
+        logo: "https://i.loli.net/2021/11/14/E5Z7UmsW4GD3qOd.png",
+        volume: 0.7,
+        mutex: true,
         video: {
           url: videoUrl,
           type: videoUrl.indexOf(".m3u8") != -1 ? "customHls" : "mp4",

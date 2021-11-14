@@ -12,7 +12,6 @@
 
     <v-card-title>联系方式</v-card-title>
     <v-card-text>
-      <a href="mailto:xh@apa.me" target="_blank">xh@apa.me</a><br />
       <a href="mailto:xhapame@gmail.com" target="_blank">xhapame@gmail.com</a>
     </v-card-text>
 
