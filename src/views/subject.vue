@@ -48,7 +48,8 @@ export default {
         );
         this.flag = true;
       } else {
-        this.$router.push("/404");
+        alert("加载数据失败！");
+        this.flag = true;
       }
 
       if (this.$route.params.url) {
@@ -60,9 +61,7 @@ export default {
     play: function (url) {
       this.GLOBAL.api.getApi(url).then((res) => {
         this.play_url = res.data.url;
-        console.log("flag2: " + this.play_url);
       });
-      console.log("flag1: " + url + this.play_url);
     },
     change_site_title: function (site_title) {
       document.title = site_title + " - " + this.GLOBAL.sitename;

@@ -61,18 +61,22 @@ export default {
     dp: null,
   }),
   mounted() {
-    this.loadVideo(this.play_url);
+    this.loadVideo("");
+    this.dp.notice("请选择播放链接", 4000);
+    document.querySelector("#dplayer").oncontextmenu = () => {
+      document.querySelector(".dplayer-menu").style.display = "none";
+      document.querySelector(".dplayer-mask").style.display = "none";
+      return false;
+    };
   },
   created() {},
   watch: {
     play_url(newval) {
-      console.log("changeVideoUrl: " + newval);
       this.loadVideo(newval);
       if (newval == "" || newval == null || newval == undefined) {
-        this.open_sncakbar("Error");
+        this.dp.notice("加载失败", 3000);
       } else {
-        this.snackbar_text = "";
-        this.open_sncakbar("Success");
+        this.dp.notice("加载成功，点击播放！", 3000);
       }
     },
   },
@@ -100,7 +104,7 @@ export default {
         screenshot: true,
         hotkey: true,
         preload: "auto",
-        logo: "https://i.loli.net/2021/11/14/E5Z7UmsW4GD3qOd.png",
+        logo: "https://s3.bmp.ovh/imgs/2021/11/699a4ffdd1c284e8.png",
         volume: 0.7,
         mutex: true,
         video: {
