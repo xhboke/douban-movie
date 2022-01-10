@@ -7,7 +7,7 @@
     </v-sheet>
 
     <div v-if="flag">
-      <playCard :play_url="play_url" :chip_genre="infoData.Genre" :rank_douban="String(infoData.Rating)" :play_URL_DATA="infoData.EpisodeUrl" />
+      <playCard :origin_url="play_url" :id="infoData.Id" :name="infoData.Name" :chip_genre="infoData.Genre" :rank_douban="String(infoData.Rating)" :play_URL_DATA="infoData.EpisodeUrl" />
       <PlayIntro :info="infoData" />
       <PlayComment :play_REVIEW_Id="infoData.Id" />
     </div>
@@ -34,24 +34,7 @@ export default {
     };
   },
   created() {
-    this.GLOBAL.api.info(this.$route.params.id).then((res) => {
-      if (res.data.Name) {
-        this.id = this.$route.params.id;
-        this.infoData = res.data;
-        this.change_site_title(this.infoData.ChineseName);
-        this.change_bar_title(
-          this.infoData.Name + "(" + this.infoData.Year + ")"
-        );
-        this.flag = true;
-      } else {
-        alert("加载数据失败！");
-        this.flag = true;
-      }
-
-      if (this.$route.params.url) {
-        this.play(this.$route.params.url);
-      }
-    });
+    this.loadData();
   },
   methods: {
     change_site_title: function (site_title) {
@@ -60,17 +43,21 @@ export default {
     change_bar_title: function (bar_title) {
       this.$root.bartitle = bar_title;
     },
-    get_play_url: function (url) {
-      this.play_url = this.play(url);
-    },
-  },
-  watch: {
-    "$route.path": function (newVal, oldVal) {
-      if (newVal.startsWith(oldVal)) {
-        this.play(this.$route.params.url);
-      } else {
-        this.play(this.$route.params.url);
-      }
+    loadData(flag = 0) {
+      this.GLOBAL.api.info(this.$route.params.id, flag).then((res) => {
+        if (res.data.Name) {
+          this.id = this.$route.params.id;
+          this.infoData = res.data;
+          this.change_site_title(this.infoData.ChineseName);
+          this.change_bar_title(
+            this.infoData.Name + "(" + this.infoData.Year + ")"
+          );
+          this.flag = true;
+        } else {
+          alert("加载数据失败！");
+          this.flag = true;
+        }
+      });
     },
   },
 };

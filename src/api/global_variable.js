@@ -8,8 +8,12 @@ const api = {
   search(name, page) {
     return axios.get(base.baseUrl + "/search/" + name + "/" + page);
   },
-  info(id) {
-    return axios.get(base.baseUrl + "/subject/" + id);
+  info(id, flag = 0) {
+    if (flag == 1) {
+      return axios.get(base.baseUrl + "/subject/" + id + "/1");
+    } else {
+      return axios.get(base.baseUrl + "/subject/" + id);
+    }
   },
   comment(id, page) {
     if (VueCookies.isKey('comment_sort')) {
