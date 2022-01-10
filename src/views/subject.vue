@@ -7,10 +7,8 @@
     </v-sheet>
 
     <div v-if="flag">
-      <playCard :play_url="play_url" :chip_genre="infoData.Genre" :rank_douban="String(infoData.Rating)" />
-
+      <playCard :play_url="play_url" :chip_genre="infoData.Genre" :rank_douban="String(infoData.Rating)" :play_URL_DATA="infoData.EpisodeUrl" />
       <PlayIntro :info="infoData" />
-      <PlayButton :play_URL_DATA="infoData.EpisodeUrl" v-if="infoData.EpisodeUrl" @transfer="get_play_url" />
       <PlayComment :play_REVIEW_Id="infoData.Id" />
     </div>
   </div>
@@ -18,7 +16,6 @@
 <script>
 import playCard from "../components/playCard";
 import PlayIntro from "../components/playIntro";
-import PlayButton from "../components/playButton";
 import PlayComment from "../components/playComment";
 
 export default {
@@ -26,7 +23,6 @@ export default {
   components: {
     playCard,
     PlayIntro,
-    PlayButton,
     PlayComment,
   },
   data() {
@@ -58,11 +54,6 @@ export default {
     });
   },
   methods: {
-    play: function (url) {
-      this.GLOBAL.api.getApi(url).then((res) => {
-        this.play_url = res.data.url;
-      });
-    },
     change_site_title: function (site_title) {
       document.title = site_title + " - " + this.GLOBAL.sitename;
     },
