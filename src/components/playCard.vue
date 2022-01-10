@@ -17,7 +17,6 @@
           豆瓣评分：暂无
         </div>
       </v-chip>
-
       <v-chip v-for="n in chip_genre" v-bind:key="n" class="ma-1" color="teal" label text-color="white">
         <v-icon left>
           mdi-label
@@ -62,21 +61,22 @@ export default {
   }),
   mounted() {
     this.loadVideo("");
-    this.dp.notice("请选择播放链接", 4000);
-    document.querySelector("#dplayer").oncontextmenu = () => {
-      document.querySelector(".dplayer-menu").style.display = "none";
-      document.querySelector(".dplayer-mask").style.display = "none";
-      return false;
-    };
+    // document.querySelector("#dplayer").oncontextmenu = () => {
+    //   document.querySelector(".dplayer-menu").style.display = "none";
+    //   document.querySelector(".dplayer-mask").style.display = "none";
+    //   return false;
+    // };
   },
-  created() {},
+  created() {
+    this.dp.notice("请选择播放链接", 4000);
+  },
   watch: {
     play_url(newval) {
       this.loadVideo(newval);
       if (newval == "" || newval == null || newval == undefined) {
-        this.dp.notice("加载失败", 3000);
+        this.dp.notice("加载失败，请重新选择播放来源", 3000);
       } else {
-        this.dp.notice("加载成功，点击播放！", 3000);
+        this.dp.notice("加载成功，点击播放！", 4000);
       }
     },
   },
@@ -99,12 +99,10 @@ export default {
         container: document.getElementById("dplayer"),
         autoplay: false,
         theme: "#FADFA3",
-        loop: true,
         lang: "zh-cn",
         screenshot: true,
         hotkey: true,
         preload: "auto",
-        logo: "https://s3.bmp.ovh/imgs/2021/11/699a4ffdd1c284e8.png",
         volume: 0.7,
         mutex: true,
         video: {
@@ -118,6 +116,31 @@ export default {
             },
           },
         },
+        danmaku: {
+          id: this.$route.params.id,
+          api: "https://dplayer.moerats.com/",
+          bottom: "15%",
+        },
+        // highlight: [
+        //   {
+        //     time: 20,
+        //     text: "这是第 20 秒",
+        //   },
+        //   {
+        //     time: 120,
+        //     text: "这是 2 分钟",
+        //   },
+        // ],
+        contextmenu: [
+          {
+            text: "苍穹影视",
+            link: "https://github.com/xhboke",
+          },
+        ],
+      });
+
+      this.dp.on("ended", function () {
+        alert("播放结束了！");
       });
     },
   },
